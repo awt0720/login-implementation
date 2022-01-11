@@ -1,6 +1,7 @@
-import "../styles/layout.scss";
 import "antd/dist/antd.css";
+import "../styles/layout.scss";
 import type {AppProps} from "next/app";
+import {QueryClient, QueryClientProvider, useQuery} from "react-query";
 // import SiteLayout from "@components/layout";
 import {NextPage} from "next";
 import {ReactElement, ReactNode} from "react";
@@ -16,12 +17,18 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+const queryClient = new QueryClient();
+
 function MyApp({Component, pageProps}: AppPropsWithLayout) {
   const getLayout =
     (Component as any).getLayout ||
     ((page) => <SiteLayout> {page} </SiteLayout>);
 
-  return getLayout(<Component {...pageProps} />);
+  return (
+    <QueryClientProvider client={queryClient}>
+      {getLayout(<Component {...pageProps} />)}
+    </QueryClientProvider>
+  );
 }
 
 export default MyApp;
