@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
-      "@types/*": ["types/*"]
+      "@types/*": ["types/*"],
+      "@common/*": ["common/*"]
     },
     "incremental": true
   },
