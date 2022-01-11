@@ -18,12 +18,21 @@
 .layout {
   .ant-layout-header {
     display: flex;
-    flex-direction: row;
-    .login-btn,
-    .logout-btn {
-      align-self: flex-end;
+    justify-content: space-between;
+    .left {
       color: white;
-      cursor: pointer;
+      nav ol {
+        display: flex;
+        gap: 30px;
+      }
+    }
+    .right {
+      .login-btn,
+      .logout-btn {
+        align-self: flex-end;
+        color: white;
+        cursor: pointer;
+      }
     }
   }
 }

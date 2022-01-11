@@ -1,0 +1,26 @@
+.item-wrapper {
+  text-align: center;
+  border: 1px solid #474747ab;
+  border-radius: 20px;
+  padding: 20px;
+  // height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  box-shadow: 5px 6px 7px #64646442;
+  cursor: pointer;
+
+  .tit {
+    margin-top: 10px;
+    height: 70px;
+  }
+  .rating {
+    margin-top: 10px;
+    .count {
+    }
+    .rate {
+    }
+  }
+}
