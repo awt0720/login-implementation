@@ -1,6 +1,6 @@
 import React from "react";
 import {Layout} from "antd";
-import MainHeader from "@components/layout/mainHeader";
+import MainHeader from "@/components/layout/mainHeader";
 
 const {Content, Footer} = Layout;
 
