@@ -15,9 +15,9 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@types/*": ["types/*"],
-      "@common/*": ["common/*"]
+      "@/components/*": ["components/*"],
+      "@/types/*": ["types/*"],
+      "@/common/*": ["common/*"]
     },
     "incremental": true
   },

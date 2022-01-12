@@ -1,9 +1,15 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "prettier.bracketSpacing": false,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "javascript.preferences.quoteStyle": "single",
-    "typescript.preferences.quoteStyle": "single",
-    "editor.tabSize": 2
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.bracketSpacing": false,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "editor.tabSize": 2,
+  "[json]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace"
+  }
 }
