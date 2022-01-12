@@ -2,6 +2,7 @@
   min-height: 280px;
   padding: 24px;
   background: #fff;
+  min-height: 88vh;
 }
 #components-layout-demo-top .logo {
   float: left;
@@ -34,5 +35,12 @@
         cursor: pointer;
       }
     }
+  }
+
+  .spin-wrapper {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
