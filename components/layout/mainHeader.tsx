@@ -1,14 +1,20 @@
 import React from "react";
 import {Header} from "antd/lib/layout/layout";
 import Menu from "antd/lib/menu";
+import {useRouter} from "next/router";
 
 const MainHeader = () => {
+  const router = useRouter();
   const login = false;
+
+  const onClickMenu = (e) => {
+    if (e.key === "1") router.push("/");
+  };
   return (
     <Header>
       <div className="left">
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">메뉴 1</Menu.Item>
+        <Menu theme="dark" mode="horizontal" onClick={onClickMenu}>
+          <Menu.Item key="1">홈</Menu.Item>
           <Menu.Item key="2">메뉴 2</Menu.Item>
           <Menu.Item key="3">메뉴 3</Menu.Item>
         </Menu>
