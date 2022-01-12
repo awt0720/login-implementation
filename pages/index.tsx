@@ -8,21 +8,20 @@ import {IFakeDb} from "@/types/fakeDb";
 
 const MainPage = () => {
   const {isLoading, error, data} = useQuery<IFakeDb[]>(
-    "repoData",
+    "list",
     () => fetch(fakeDBApiUrl).then((res) => res.json()),
     {refetchOnWindowFocus: false}
   );
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading || !data) return <LoadingPage />;
 
   if (error) return "An error has occurred: " + error;
-
   return (
     <div className="main-page-wrapper">
       <h2> 판매 목록 </h2>
       <Row gutter={[16, 24]}>
         {!isLoading &&
-          data.map((val) => (
+          data?.map((val) => (
             <Link href={`/detail/${val.id}`} key={val.id}>
               <Col className="gutter-row" span={8}>
                 <div className="item-wrapper">
