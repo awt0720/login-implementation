@@ -1,6 +1,7 @@
 import "antd/dist/antd.css";
 import "../styles/layout.scss";
 import "../styles/main.scss";
+import "../styles/detail.scss";
 import type {AppProps} from "next/app";
 import {QueryClient, QueryClientProvider} from "react-query";
 // import SiteLayout from "@components/layout";
