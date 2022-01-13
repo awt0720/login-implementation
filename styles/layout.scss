@@ -38,6 +38,7 @@ body ul {
 }
 
 .layout {
+  min-width: 320px;
   .ant-layout-header {
     display: flex;
     justify-content: space-between;
@@ -64,4 +65,8 @@ body ul {
     align-items: center;
     justify-content: center;
   }
+}
+
+.container {
+  min-height: 88vh;
 }
