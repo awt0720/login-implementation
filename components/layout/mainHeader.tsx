@@ -2,6 +2,7 @@ import React from "react";
 import {Header} from "antd/lib/layout/layout";
 import Menu from "antd/lib/menu";
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 const MainHeader = () => {
   const router = useRouter();
@@ -21,9 +22,13 @@ const MainHeader = () => {
       </div>
       <div className="right">
         {login ? (
-          <div className="logout-btn">로그아웃</div>
+          <Link href="/logout">
+            <a className="logout-btn">로그아웃</a>
+          </Link>
         ) : (
-          <div className="login-btn">로그인</div>
+          <Link href="/login">
+            <a className="login-btn">로그인</a>
+          </Link>
         )}
       </div>
     </Header>
