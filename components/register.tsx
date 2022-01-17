@@ -1,5 +1,6 @@
 import React from "react";
 import {Form, Input, Modal} from "antd";
+import ModalContainer from "@/components/shared/modalContainer";
 
 interface IRegisterProps {
   open: boolean;
@@ -13,24 +14,7 @@ const Register: React.FC<IRegisterProps> = ({open, setOpen}) => {
     alert("회원가입 성공");
   };
   return (
-    <Modal
-      visible={open}
-      title="회원가입"
-      okText="Create"
-      cancelText="Cancel"
-      onCancel={() => setOpen(false)}
-      onOk={() => {
-        form
-          .validateFields()
-          .then((values) => {
-            form.resetFields();
-            onCreate(values);
-          })
-          .catch((info) => {
-            console.log("Validate Failed:", info);
-          });
-      }}
-    >
+    <ModalContainer form={form} open={open} setOpen={setOpen} onCreate={onCreate}>
       <Form form={form} className="form" name="basic" autoComplete="off">
         <Form.Item style={{marginTop: "20px"}} name="name" rules={[{required: true, message: "이름를 입력해주세요."}]}>
           <Input placeholder="이메일" size="large" className="email-input" />
@@ -42,7 +26,7 @@ const Register: React.FC<IRegisterProps> = ({open, setOpen}) => {
           <Input.Password placeholder="비밀번호" size="large" className="password-input" />
         </Form.Item>
       </Form>
-    </Modal>
+    </ModalContainer>
   );
 };
 
