@@ -1,7 +1,9 @@
-import React from "react";
-import {Form, Input, Checkbox, Button} from "antd";
+import React, {useState} from "react";
+import {Form, Input, Button} from "antd";
+import Register from "@/components/register";
 
 const login = () => {
+  const [isModal, setIsModal] = useState<boolean>(false);
   const onFinish = () => {
     alert("로그인 성공");
   };
@@ -17,31 +19,18 @@ const login = () => {
           name="basic"
           labelCol={{span: 8}}
           wrapperCol={{span: 16}}
-          initialValues={{remember: true}}
           onFinish={onFinish}
           autoComplete="off"
         >
-          <Form.Item
-            wrapperCol={{md: 24}}
-            name="username"
-            rules={[{required: true, message: "아아디를 입력해주세요."}]}
-          >
-            <Input
-              placeholder="아이디 (이메일)"
-              size="large"
-              className="id-input"
-            />
+          <Form.Item wrapperCol={{md: 24}} name="id" rules={[{required: true, message: "아아디를 입력해주세요."}]}>
+            <Input placeholder="아이디 (이메일)" size="large" className="id-input" />
           </Form.Item>
           <Form.Item
             wrapperCol={{md: 24}}
             name="password"
             rules={[{required: true, message: "비밀번호를 입력해주세요."}]}
           >
-            <Input.Password
-              placeholder="비밀번호"
-              size="large"
-              className="password-input"
-            />
+            <Input.Password placeholder="비밀번호" size="large" className="password-input" />
           </Form.Item>
           <Form.Item wrapperCol={{md: 24}}>
             <Button className="btn" type="primary" htmlType="submit">
@@ -61,7 +50,9 @@ const login = () => {
             <li>페이스북</li>
           </ul>
         </div>
+        <Button onClick={() => setIsModal(true)}>간편 회원가입</Button>
       </div>
+      <Register open={isModal} setOpen={setIsModal} />
     </div>
   );
 };
