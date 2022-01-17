@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, FormInstance} from "antd";
+import {FormInstance, Modal} from "antd";
 
 interface IModalContainer {
   form: FormInstance<any>;
