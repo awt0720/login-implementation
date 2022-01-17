@@ -1,6 +1,5 @@
 import React from "react";
-import {Form, Button, Input, Modal} from "antd";
-import ModalContainer from "./shared/modalContainer";
+import {Form, Input, Modal} from "antd";
 
 interface IRegisterProps {
   open: boolean;
