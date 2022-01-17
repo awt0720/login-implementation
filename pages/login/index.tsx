@@ -1,9 +1,13 @@
 import React, {useState} from "react";
 import {Button, Form, Input} from "antd";
 import Register from "@/components/register";
+import FindId from "@/components/findId";
+import FindPassword from "@/components/findPassword";
 
 const login = () => {
-  const [isModal, setIsModal] = useState<boolean>(false);
+  const [openRegiser, serOpenRegister] = useState<boolean>(false);
+  const [openFindId, serOpenFindId] = useState<boolean>(false);
+  const [openFindPassword, serOpenFindPassword] = useState<boolean>(false);
   const onFinish = () => {
     alert("로그인 성공");
   };
@@ -38,8 +42,8 @@ const login = () => {
             </Button>
           </Form.Item>
           <div className="etc">
-            <div>아이디 찾기</div>
-            <div>비밀번호 찾기</div>
+            <div onClick={() => serOpenFindId(true)}>아이디 찾기</div>
+            <div onClick={() => serOpenFindPassword(true)}>비밀번호 찾기</div>
           </div>
         </Form>
         <div className="bottom">
@@ -50,9 +54,11 @@ const login = () => {
             <li>페이스북</li>
           </ul>
         </div>
-        <Button onClick={() => setIsModal(true)}>간편 회원가입</Button>
+        <Button onClick={() => serOpenRegister(true)}>간편 회원가입</Button>
       </div>
-      <Register open={isModal} setOpen={setIsModal} />
+      <Register open={openRegiser} setOpen={serOpenRegister} />
+      <FindId open={openFindId} setOpen={serOpenFindId} />
+      <FindPassword open={openFindPassword} setOpen={serOpenFindPassword} />
     </div>
   );
 };
