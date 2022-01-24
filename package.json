@@ -2,6 +2,7 @@
   "name": "my-app",
   "private": true,
   "scripts": {
+    "sever": "nodemon --watch \"./server/**/*.ts\" --exec \"ts-node\" ./server/server.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
