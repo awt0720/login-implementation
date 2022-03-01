@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 import User from "../model/user";
 import { IUser } from "../interface/user";
 
-const singup = async (req: Request, res: Response) => {
+const signup = async (req: Request, res: Response) => {
   const data: IUser = req.body;
+
   const { name, email, phone, password } = req.body;
   if (!email || !name || !phone || !password) {
     return res.status(400).send({
@@ -14,9 +15,8 @@ const singup = async (req: Request, res: Response) => {
   }
 
   const isUser = await User.findOne({ email });
-
   if (isUser) {
-    return res.send({ success: false, error: { message: "이미 가입된 유저 입니다." } });
+    return res.status(400).send({ success: false, error: { message: "이미 가입된 유저 입니다." } });
   }
 
   try {
@@ -25,8 +25,8 @@ const singup = async (req: Request, res: Response) => {
     res.send({ success: true, info: user });
   } catch (e) {
     console.log(e);
-    res.send({ success: false, err: e });
+    res.status(400).send({ success: false, err: e });
   }
 };
 
-export { singup };
+export { signup };

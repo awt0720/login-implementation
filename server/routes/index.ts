@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { singup } from "../controller/userController";
-import { Request, Response } from "express";
+import { signup } from "../controller/userController";
 
 const router = Router();
 
-router.post("/signup", async (req: Request, res: Response) => singup(req, res));
+router.post("/signup", signup);
 
 export default router;

@@ -1,29 +1,15 @@
 import React from "react";
-import {FormInstance, Modal} from "antd";
+import { FormInstance, Modal } from "antd";
 
 interface IModalContainer {
-  form: FormInstance<any>;
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  onCreate: (values) => void;
+  onClosed: () => void;
   children: React.ReactNode;
 }
 
-const ModalContainer: React.FC<IModalContainer> = ({form, open, setOpen, onCreate, children}) => {
+const ModalContainer: React.FC<IModalContainer> = ({ open, onClosed, children }) => {
   return (
-    <Modal
-      visible={open}
-      title="회원가입"
-      okText="Create"
-      cancelText="Cancel"
-      onCancel={() => setOpen(false)}
-      onOk={() => {
-        form.validateFields().then((values) => {
-          form.resetFields();
-          onCreate(values);
-        });
-      }}
-    >
+    <Modal visible={open} title="회원가입" okText="Create" cancelText="Cancel" onCancel={onClosed} footer={null}>
       {children}
     </Modal>
   );
