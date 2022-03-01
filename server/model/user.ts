@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 import { IUserSchema } from "../interface/user";
+
+const saltRounds = 10;
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -31,6 +34,20 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model<IUserSchema>("User", userSchema);
+userSchema.pre("save", function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+      if (err) return next(err);
+      bcrypt.hash(user.password, salt, function (err, hash) {
+        if (err) return next(err);
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+});
 
-export default User;
+export default mongoose.model<IUserSchema>("User", userSchema);
