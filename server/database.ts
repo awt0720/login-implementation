@@ -1,18 +1,15 @@
 import dotenv from "dotenv";
 import path from "path";
-dotenv.config({path: path.resolve(__dirname, ".env")});
-const {MongoClient} = require("mongodb");
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+import mongoose from "mongoose";
+const { MONGO_URL } = process.env;
 
-const {MONGO_URL} = process.env;
-
-const client = new MongoClient(MONGO_URL);
 export default async function dbConnect() {
   try {
-    await client.connect();
-    console.log("Connected db");
+    const conn = await mongoose.connect(MONGO_URL as string);
+    console.log(`Connected db / ${conn.connection.host}`);
   } catch (err) {
     console.log(err);
-  } finally {
-    await client.close();
+    process.exit(1);
   }
 }
