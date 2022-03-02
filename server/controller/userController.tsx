@@ -1,17 +1,26 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import dotenv from "dotenv";
-import jwt from "jsonwebtoken";
 import User from "../model/user";
 import { IUser } from "../interface/user";
-dotenv.config();
+import { generateAccessToken, generateRefreshToken, decodeToken } from "./session";
 
-const secretKey = process.env.SECRET_KEY as string;
+const successUserAuth = (userInfo: { name: string; email: string }) => {
+  const accessToken = generateAccessToken(userInfo);
+  const { exp } = decodeToken(accessToken);
+  return {
+    success: true,
+    userInfo,
+    isLoging: true,
+    token: accessToken,
+    exp,
+  };
+};
 
 export const signup = async (req: Request, res: Response) => {
   const data: IUser = req.body;
 
   const { name, email, phone, password } = req.body;
+
   if (!email || !name || !phone || !password) {
     return res.status(400).send({
       error: {
@@ -26,22 +35,14 @@ export const signup = async (req: Request, res: Response) => {
   }
 
   try {
-    const newUser = new User(data);
-    const user = await newUser.save();
-    jwt.sign(
-      { name, email },
-      secretKey,
-      {
-        expiresIn: "1h",
-      },
-      (err, token) => {
-        if (err) throw err;
-        res
-          .status(200)
-          .cookie("accessToken", token, { maxAge: 3600, httpOnly: true })
-          .send({ success: true, user: { name, email }, isLoging: true });
-      }
-    );
+    new User(data).save();
+    const userInfo = { name, email };
+    const sendData = successUserAuth(userInfo);
+
+    res
+      .status(200)
+      .cookie("refresh_token", generateRefreshToken(email), { maxAge: 3600, httpOnly: true })
+      .send(sendData);
   } catch (e) {
     console.log(e);
     res.status(400).send({ success: false, err: e });
@@ -49,27 +50,18 @@ export const signup = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  console.log("start");
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
   if (user) {
     const validPassword = await bcrypt.compare(password, user.password);
     if (validPassword) {
-      jwt.sign(
-        { name: user.name, email },
-        secretKey,
-        {
-          expiresIn: "1h",
-        },
-        (err, token) => {
-          if (err) throw err;
-          res
-            .status(200)
-            .cookie("accessToken", token, { maxAge: 3600, httpOnly: true })
-            .send({ success: true, user: { name: user.name, email: user.email }, isLoging: true });
-        }
-      );
+      const userInfo = { name: user.name, email: user.email };
+      const sendData = successUserAuth(userInfo);
+      res
+        .status(200)
+        .cookie("refresh_token", generateRefreshToken(user.email), { maxAge: 3600, httpOnly: true })
+        .send(sendData);
     } else {
       res.send("비밀번호 불일치");
     }
