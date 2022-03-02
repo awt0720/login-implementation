@@ -2,6 +2,10 @@
 
 ## 기술스택
 
+> 추가 기능
+> >jsonwebtoken
+> > > 20220303 server - access_token 과 refresh_token 발행으로 로그인 확인 
+
 > 공용
 
 - Typescript javascript superSet
@@ -11,6 +15,7 @@
 - cookie-parser - cookie를 쉽게 가져오기 위한 미들웨어
 - cors - 다른 port에서도 api를 사용하기 위한 미들웨어 `ex)현재 http://localhost:3000만 허용`
 - mongoose - Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리
+
   > Client
 - Port : 3000
 - Next.js - react 프레임워크 (주로 사용하여 채택)
@@ -27,7 +32,8 @@
 
 post `/api/auth/signup`
 post `/api/auth/login`
-get `/api/auth/refresh`
+get `/api/auth/logOut`
+get `/api/auth/refreshAuth`
 
 ### User Schema
 
@@ -39,5 +45,5 @@ get `/api/auth/refresh`
 ## 구현 예정
 
 - 이메일, 비밀번호 정규식
-- refreshToken을 추가하여 refreshToken으로만 client에서 관리하기
+- client에서 access token 로컬 변수 저장
 - SNS 로그인
