@@ -1,16 +1,13 @@
 import { Router } from "express";
-import { signup, login } from "../controller/userController";
-import { refresh } from "../controller/authorize";
+import { signup, login, logOut } from "../controller/userController";
+import { refreshAuth } from "../controller/session";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  res.send("success");
-});
-
 router.post("/login", login);
 router.post("/signup", signup);
+router.get("/logout", logOut);
 
-router.get("/refresh", refresh);
+router.get("/refreshAuth", refreshAuth);
 
 export default router;
