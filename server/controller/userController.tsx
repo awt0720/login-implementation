@@ -8,7 +8,7 @@ dotenv.config();
 
 const secretKey = process.env.SECRET_KEY as string;
 
-const signup = async (req: Request, res: Response) => {
+export const signup = async (req: Request, res: Response) => {
   const data: IUser = req.body;
 
   const { name, email, phone, password } = req.body;
@@ -48,7 +48,7 @@ const signup = async (req: Request, res: Response) => {
   }
 };
 
-const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response) => {
   console.log("start");
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -78,4 +78,11 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-export { signup, login };
+export const logOut = (req: Request, res: Response) => {
+  return res
+    .cookie("refresh_token", null, {
+      maxAge: 0,
+      httpOnly: true,
+    })
+    .sendStatus(200);
+};
